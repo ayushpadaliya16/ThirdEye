@@ -1,0 +1,42 @@
+{
+  "name": "fake-profile-detection-app",
+  "version": "1.0.0",
+  "description": "Next.js Threat Intelligence Dashboard for Fake Social Media Profile Detection",
+  "main": "server.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "server:express": "node server.js",
+    "server:fastapi": "python3 main.py",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "nextjs",
+    "react-query",
+    "threat-intelligence",
+    "fake-profile-detection",
+    "fraud-risk"
+  ],
+  "author": "Backend API Architect",
+  "license": "MIT",
+  "dependencies": {
+    "@tanstack/react-query": "^5.101.4",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.21",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "next": "^14.2.24",
+    "postcss": "^8.5.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/react": "^18.3.12"
+  }
+}

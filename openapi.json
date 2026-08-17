@@ -1,0 +1,98 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Fake Social Media Profile Detection REST API",
+    "description": "API Endpoint Architecture for Threat-Intelligence Dashboard consuming fake social media profile analysis.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/analyze-profile": {
+      "post": {
+        "summary": "Analyze a social media profile handle for fraud risk and threat metrics",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "platform"],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "@example"
+                  },
+                  "platform": {
+                    "type": "string",
+                    "example": "instagram"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Threat Intelligence Dashboard Data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "target_username",
+                    "fraud_risk_score",
+                    "metadata",
+                    "anomalies",
+                    "nlp_analysis",
+                    "report_timestamp"
+                  ],
+                  "properties": {
+                    "target_username": { "type": "string", "example": "@example" },
+                    "fraud_risk_score": { "type": "integer", "minimum": 0, "maximum": 100, "example": 87 },
+                    "metadata": {
+                      "type": "object",
+                      "required": ["follower_count", "following_count", "follower_ratio", "account_age_days", "profile_pic_exists"],
+                      "properties": {
+                        "follower_count": { "type": "integer", "example": 142 },
+                        "following_count": { "type": "integer", "example": 3890 },
+                        "follower_ratio": { "type": "number", "example": 27.39 },
+                        "account_age_days": { "type": "integer", "example": 14 },
+                        "profile_pic_exists": { "type": "boolean", "example": false }
+                      }
+                    },
+                    "anomalies": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "example": [
+                        "Following ratio exceeds 10:1 (3890 following vs 142 followers)",
+                        "Bio contains known phishing keywords"
+                      ]
+                    },
+                    "nlp_analysis": {
+                      "type": "object",
+                      "required": ["bio_spam_likelihood", "suspicious_keywords_found"],
+                      "properties": {
+                        "bio_spam_likelihood": { "type": "string", "example": "87%" },
+                        "suspicious_keywords_found": {
+                          "type": "array",
+                          "items": { "type": "string" },
+                          "example": ["crypto giveaway", "dm for promo", "whatsapp investment"]
+                        }
+                      }
+                    },
+                    "report_timestamp": {
+                      "type": "string",
+                      "example": "2026-08-17T20:36:23.174Z#SHA256:C60B34A6147D94FE"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Missing required parameters"
+          }
+        }
+      }
+    }
+  }
+}

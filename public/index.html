@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentinelIntel - Fake Profile Threat Intelligence API & Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+      <div class="brand">
+        <div class="shield-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>SENTINEL<span>INTEL</span></h1>
+          <span class="badge-architect">REST API Architecture v1.0</span>
+        </div>
+      </div>
+      <div class="system-status">
+        <span class="pulse-dot"></span>
+        <span class="status-label">API ENDPOINT: <code>POST /api/analyze-profile</code></span>
+      </div>
+    </header>
+
+    <!-- Main Grid Layout -->
+    <main class="dashboard-grid">
+      <!-- Left Panel: API Request Controller -->
+      <section class="card query-card">
+        <div class="card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Target Profile Inspection
+          </h2>
+          <span class="http-badge post">POST</span>
+        </div>
+
+        <form id="profile-form" class="api-form">
+          <div class="form-group">
+            <label for="input-username">Target Username / Handle</label>
+            <div class="input-prefix-wrapper">
+              <input type="text" id="input-username" value="@example" placeholder="@username" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-platform">Target Social Platform</label>
+            <select id="input-platform">
+              <option value="instagram" selected>Instagram</option>
+              <option value="twitter">Twitter / X</option>
+              <option value="facebook">Facebook</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="telegram">Telegram</option>
+              <option value="tiktok">TikTok</option>
+            </select>
+          </div>
+
+          <div class="preset-chips">
+            <span class="preset-title">Test Scenarios:</span>
+            <button type="button" class="chip" data-user="@example" data-platform="instagram">Default (@example)</button>
+            <button type="button" class="chip danger" data-user="@crypto_scammer" data-platform="telegram">Scammer Bot</button>
+            <button type="button" class="chip warning" data-user="@impersonator_vip" data-platform="instagram">Impersonator</button>
+            <button type="button" class="chip success" data-user="@verified_creator" data-platform="twitter">Legitimate User</button>
+          </div>
+
+          <button type="submit" id="btn-submit" class="btn-analyze">
+            <span class="btn-text">Execute API Inspection</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+
+        <!-- API Endpoint Architecture Spec -->
+        <div class="api-spec-box">
+          <h3>REST Endpoint Payload Contract</h3>
+          <pre><code>{
+  <span class="key">"username"</span>: <span class="string">"@example"</span>,
+  <span class="key">"platform"</span>: <span class="string">"instagram"</span>
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Right Panel: Threat Intelligence Dossier -->
+      <section class="card results-card">
+        <div class="card-header">
+          <h2>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Threat Intelligence Report
+          </h2>
+          <div class="view-tabs">
+            <button class="tab-btn active" data-tab="visual">Dashboard View</button>
+            <button class="tab-btn" data-tab="json">Raw JSON Response</button>
+          </div>
+        </div>
+
+        <!-- Dashboard View Content -->
+        <div id="tab-visual" class="tab-content active">
+          <div class="threat-summary-bar">
+            <div class="target-profile-info">
+              <span class="target-handle" id="res-target-handle">@example</span>
+              <span class="target-platform-tag" id="res-target-platform">INSTAGRAM</span>
+            </div>
+            <div class="timestamp-box">
+              <span class="ts-label">Crypto Stamp:</span>
+              <span class="ts-value" id="res-timestamp">--</span>
+            </div>
+          </div>
+
+          <div class="threat-grid">
+            <!-- Fraud Risk Gauge -->
+            <div class="metric-card risk-gauge-card">
+              <span class="metric-title">Fraud Risk Score</span>
+              <div class="risk-gauge-container">
+                <div class="gauge-ring" id="gauge-ring">
+                  <div class="gauge-value" id="res-risk-score">87</div>
+                  <div class="gauge-sub">/ 100</div>
+                </div>
+              </div>
+              <span class="risk-severity-badge high" id="res-risk-label">HIGH RISK THREAT</span>
+            </div>
+
+            <!-- Metadata Metrics -->
+            <div class="metric-card metadata-card">
+              <span class="metric-title">Account Metadata</span>
+              <div class="meta-stats-grid">
+                <div class="stat-item">
+                  <span class="stat-num" id="res-followers">142</span>
+                  <span class="stat-lbl">Followers</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-num" id="res-following">3,890</span>
+                  <span class="stat-lbl">Following</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-num" id="res-ratio">27.39</span>
+                  <span class="stat-lbl">Follower Ratio</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-num" id="res-age">14 Days</span>
+                  <span class="stat-lbl">Account Age</span>
+                </div>
+                <div class="stat-item full-width">
+                  <span class="stat-lbl">Profile Avatar Status:</span>
+                  <span class="pic-status-badge" id="res-avatar-status">Missing (Default Picture)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anomalies Breakdown -->
+          <div class="analysis-section">
+            <h3>Detected Behavioral & Structural Anomalies</h3>
+            <div class="anomalies-list" id="res-anomalies">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- NLP Spam & Keyword Analysis -->
+          <div class="analysis-section">
+            <h3>NLP & Bio Spam Analysis</h3>
+            <div class="nlp-grid">
+              <div class="nlp-score-box">
+                <span class="nlp-title">Bio Spam Likelihood</span>
+                <div class="nlp-bar-wrapper">
+                  <div class="nlp-bar-fill" id="res-nlp-fill" style="width: 87%;"></div>
+                </div>
+                <span class="nlp-percent" id="res-nlp-percent">87%</span>
+              </div>
+              <div class="nlp-keywords-box">
+                <span class="nlp-title">Suspicious Keywords Extracted</span>
+                <div class="keywords-flex" id="res-keywords">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Raw JSON Response Tab -->
+        <div id="tab-json" class="tab-content">
+          <div class="json-header">
+            <span>JSON Output (HTTP 200 OK)</span>
+            <button id="btn-copy-json" class="btn-copy">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy JSON
+            </button>
+          </div>
+          <pre class="json-code-block"><code id="res-json-code">// Executing API query...</code></pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
