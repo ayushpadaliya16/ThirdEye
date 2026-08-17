@@ -98,3 +98,7 @@ curl -X POST http://localhost:3000/api/analyze-profile \
 | `nlp_analysis.bio_spam_likelihood` | String (%) | NLP classification score for bio/description spam. |
 | `nlp_analysis.suspicious_keywords_found` | Array[String] | High-risk phishing / scam keywords extracted by NLP. |
 | `report_timestamp` | String | Cryptographic ISO 8601 timestamp signed with SHA-256 hash digest. |
+
+
+## Backend AI Engine
+See [backend/README.md](backend/README.md) for the Sentinel AI Engine integration guide and API specs.
